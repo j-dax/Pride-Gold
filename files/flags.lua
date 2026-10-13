@@ -1,0 +1,16 @@
+return {
+	{ id = "trans", stripes = { "5BCEFA", "F5A9B8", "FFFFFF", "F5A9B8", "5BCEFA" } },
+	{ id = "rainbow", stripes = { "E40303", "FF8C00", "FFED00", "008026", "004DFF", "750787" } },
+	{ id = "bi", stripes = { "D60270", "D60270", "9B4F96", "0038A8", "0038A8" } },
+	{ id = "pan", stripes = { "FF218C", "FFD800", "21B1FF" } },
+	{ id = "nonbinary", stripes = { "FCF434", "FFFFFF", "9C59D1", "2C2C2C" } },
+	{ id = "lesbian", stripes = { "D52D00", "FF9A56", "FFFFFF", "D362A4", "A30262" } },
+	{ id = "gay", stripes = { "078D70", "26CEAA", "98E8C1", "FFFFFF", "7BADE2", "5049CC", "3D1A78" } },
+	{ id = "asexual", stripes = { "000000", "A3A3A3", "FFFFFF", "800080" } },
+	{ id = "aromantic", stripes = { "3DA542", "A7D379", "FFFFFF", "A9A9A9", "000000" } },
+	{ id = "aroace", stripes = { "E28C00", "ECCD00", "FFFFFF", "62AEDC", "203856" } },
+	{ id = "genderfluid", stripes = { "FF76A4", "FFFFFF", "C011D7", "000000", "2F3CBE" } },
+	{ id = "genderqueer", stripes = { "B57EDC", "FFFFFF", "4A8123" } },
+	{ id = "agender", stripes = { "000000", "BCC4C7", "FFFFFF", "B7F684", "FFFFFF", "BCC4C7", "000000" } },
+	{ id = "polysexual", stripes = { "F714BA", "01D66A", "1594F6" } },
+}

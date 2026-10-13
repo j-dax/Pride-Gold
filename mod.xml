@@ -1,0 +1,7 @@
+<Mod
+	name="Pride Gold"
+	description="Paints gold nuggets, gold and the gold icons with a pride flag of your choice.\nPick the flag in Mod Settings."
+	request_no_api_restrictions="0"
+	ui_icon="icon.png"
+>
+</Mod>
