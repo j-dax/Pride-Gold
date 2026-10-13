@@ -7,6 +7,14 @@ local RESTART = MOD_SETTING_SCOPE_RUNTIME_RESTART
 
 mod_settings = {
 	{
+		id = "blood_money",
+		ui_name = "Blood money",
+		ui_description = "How the healing nuggets from the Blood Money perk look.",
+		value_default = "outline",
+		values = { { "outline", "Flag with red outline" }, { "vanilla", "Unchanged" } },
+		scope = RESTART,
+	},
+	{
 		id = "flag",
 		ui_name = "Flag",
 		ui_description = "Which pride flag gold is painted with. Applies after restarting the game.",
@@ -30,18 +38,10 @@ mod_settings = {
 		scope = RESTART,
 	},
 	{
-		id = "nuggets",
-		ui_name = "Gold nuggets",
-		ui_description = "Paint gold nuggets, idols and the gold statue with the flag.",
+		id = "icons",
+		ui_name = "Gold icons",
+		ui_description = "Paint the gold counter icon and the nugget item icon.",
 		value_default = true,
-		scope = RESTART,
-	},
-	{
-		id = "blood_money",
-		ui_name = "Blood money",
-		ui_description = "How the healing nuggets from the Blood Money perk look.",
-		value_default = "outline",
-		values = { { "outline", "Flag with red outline" }, { "vanilla", "Unchanged" } },
 		scope = RESTART,
 	},
 	{
@@ -52,9 +52,9 @@ mod_settings = {
 		scope = RESTART,
 	},
 	{
-		id = "icons",
-		ui_name = "Gold icons",
-		ui_description = "Paint the gold counter icon and the nugget item icon.",
+		id = "nuggets",
+		ui_name = "Gold nuggets",
+		ui_description = "Paint gold nuggets, idols and the gold statue with the flag.",
 		value_default = true,
 		scope = RESTART,
 	},
