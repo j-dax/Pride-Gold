@@ -38,6 +38,13 @@ mod_settings = {
 		scope = RESTART,
 	},
 	{
+		id = "glow",
+		ui_name = "Gold glow",
+		ui_description = "Keep the glow on gold nuggets. Turning it off makes pale stripes easier to see.",
+		value_default = true,
+		scope = RESTART,
+	},
+	{
 		id = "icons",
 		ui_name = "Gold icons",
 		ui_description = "Paint the gold counter icon and the nugget item icon.",

@@ -36,7 +36,9 @@ local blood_mode = setting("blood_money", "outline")
 edit("data/materials.xml", function(xml)
 	if recolour_nuggets then
 		xml = xml:gsub('(name="gold_box2d".-<Graphics)', '%1 normal_mapped="0"', 1)
-		xml = xml:gsub('(name="gold_box2d".-)gfx_glow_color', '%1gfx_glow="0" gfx_glow_color', 1)
+		if not setting("glow", true) then
+			xml = xml:gsub('(name="gold_box2d".-)gfx_glow_color', '%1gfx_glow="0" gfx_glow_color', 1)
+		end
 	end
 	if blood_mode == "outline" then
 		xml = xml:gsub('(name="bloodgold_box2d".-<Graphics)', '%1 normal_mapped="0"', 1)
