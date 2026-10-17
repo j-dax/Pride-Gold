@@ -12,12 +12,19 @@ local NUGGETS = {
 	{ "goldnugget_1000.xml", "data/items_gfx/goldnugget_20px.png", "normal", "bloodmoney_1000.xml" },
 	{ "goldnugget_10000.xml", "data/items_gfx/easter/golden_idol.png", "colour", "bloodmoney_10000.xml" },
 	{ "goldnugget_200000.xml", "data/items_gfx/easter/golden_idol_big.png", "normal", "bloodmoney_200000.xml" },
-	{ "goldnugget_x.xml", "data/entities/animals/boss_centipede/rewards/gold_reward_sprite.png", "colour", "bloodmoney_x.xml" },
+	{
+		"goldnugget_x.xml",
+		"data/entities/animals/boss_centipede/rewards/gold_reward_sprite.png",
+		"colour",
+		"bloodmoney_x.xml",
+	},
 }
 
 local function setting(id, default)
 	local value = ModSettingGet("pride_gold." .. id)
-	if value == nil then return default end
+	if value == nil then
+		return default
+	end
 	return value
 end
 
@@ -26,9 +33,18 @@ local function edit(path, fn)
 end
 
 local flag = flags[1]
-for _, f in ipairs(flags) do
-	if f.id == setting("flag", "trans") then flag = f end
+local index = 1
+for i, f in ipairs(flags) do
+	if f.id == setting("flag", "trans") then
+		index = i
+		flag = f
+	end
 end
+if setting("random_flag", false) then
+	flag = flags[(index - 1 + math.random(#flags - 1)) % #flags + 1]
+	ModSettingSetNextValue("pride_gold.flag", flag.id, false)
+end
+
 local colours = paint.colours(flag)
 local recolour_nuggets = setting("nuggets", true)
 local blood_mode = setting("blood_money", "outline")
@@ -67,7 +83,13 @@ for _, n in ipairs(NUGGETS) do
 	end
 	if blood_file and blood_image then
 		edit(PICKUP .. blood_file, function(xml)
-			return (xml:gsub('material="bloodgold_box2d"', 'image_file="' .. blood_image .. '" material="bloodgold_box2d"', 1))
+			return (
+				xml:gsub(
+					'material="bloodgold_box2d"',
+					'image_file="' .. blood_image .. '" material="bloodgold_box2d"',
+					1
+				)
+			)
 		end)
 	end
 end

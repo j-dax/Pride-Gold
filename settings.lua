@@ -65,6 +65,13 @@ mod_settings = {
 		value_default = true,
 		scope = RESTART,
 	},
+	{
+		id = "random_flag",
+		ui_name = "Random flag",
+		ui_description = "Switch to a different random flag each time the game starts.",
+		value_default = false,
+		scope = RESTART,
+	},
 }
 
 function ModSettingsUpdate(init_scope)
