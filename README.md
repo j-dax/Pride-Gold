@@ -10,4 +10,4 @@ Flags: trans, rainbow, bi, pan, non-binary, lesbian, gay (MLM), ace, aro, aroace
 
 To add a flag, add its stripe colours to `files/flags.lua` (top to bottom, repeat a colour to make it thicker) and add the id to the list in `settings.lua`.
 
-Inspired by deathhancox's [Trans Gold](https://github.com/deathhancox/trans_gold) and Evaisa.
+Inspired by deathhancox's [Trans Gold](https://github.com/deathhancox/trans_gold).
