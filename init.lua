@@ -10,12 +10,12 @@ local NUGGETS = {
 	{ "goldnugget_50.xml", "data/items_gfx/goldnugget_9px.png", "normal", "bloodmoney_50.xml" },
 	{ "goldnugget_200.xml", "data/items_gfx/goldnugget_12px.png", "normal", "bloodmoney_200.xml" },
 	{ "goldnugget_1000.xml", "data/items_gfx/goldnugget_20px.png", "normal", "bloodmoney_1000.xml" },
-	{ "goldnugget_10000.xml", "data/items_gfx/easter/golden_idol.png", "colour", "bloodmoney_10000.xml" },
+	{ "goldnugget_10000.xml", "data/items_gfx/easter/golden_idol.png", "color", "bloodmoney_10000.xml" },
 	{ "goldnugget_200000.xml", "data/items_gfx/easter/golden_idol_big.png", "normal", "bloodmoney_200000.xml" },
 	{
 		"goldnugget_x.xml",
 		"data/entities/animals/boss_centipede/rewards/gold_reward_sprite.png",
-		"colour",
+		"color",
 		"bloodmoney_x.xml",
 	},
 }
@@ -62,12 +62,12 @@ end
 ModSettingSet("pride_gold.launch", launch)
 ModSettingSet("pride_gold.painted", flag.id)
 
-local colours = paint.colours(flag)
-local recolour_nuggets = setting("nuggets", true)
+local colors = paint.colors(flag)
+local recolor_nuggets = setting("nuggets", true)
 local blood_mode = setting("blood_money", "outline")
 
 edit("data/materials.xml", function(xml)
-	if recolour_nuggets then
+	if recolor_nuggets then
 		xml = xml:gsub('(name="gold_box2d".-<Graphics)', '%1 normal_mapped="0"', 1)
 		if not setting("glow", true) then
 			xml = xml:gsub('(name="gold_box2d".-)gfx_glow_color', '%1gfx_glow="0" gfx_glow_color', 1)
@@ -84,8 +84,8 @@ for _, n in ipairs(NUGGETS) do
 	local src = paint.read(image)
 	local name = ROOT .. "generated/" .. image:match("([^/]+)%.png$")
 
-	if src and recolour_nuggets then
-		paint.body(src, name .. ".png", colours, kind, false)
+	if src and recolor_nuggets then
+		paint.body(src, name .. ".png", colors, kind, false)
 		edit(PICKUP .. file, function(xml)
 			return (xml:gsub(image, name .. ".png"))
 		end)
@@ -94,8 +94,8 @@ for _, n in ipairs(NUGGETS) do
 	local blood_image
 	if src and blood_mode == "outline" then
 		blood_image = name .. "_blood.png"
-		paint.body(src, blood_image, colours, kind, true)
-	elseif recolour_nuggets then
+		paint.body(src, blood_image, colors, kind, true)
+	elseif recolor_nuggets then
 		blood_image = image
 	end
 	if blood_file and blood_image then
@@ -112,11 +112,11 @@ for _, n in ipairs(NUGGETS) do
 end
 
 if setting("gold_material", true) then
-	paint.recolour("data/materials_gfx/gold.png", colours, 1.0, true)
-	paint.recolour("data/materials_gfx/gold_dark.png", colours, 0.7, true)
+	paint.recolor("data/materials_gfx/gold.png", colors, 1.0, true)
+	paint.recolor("data/materials_gfx/gold_dark.png", colors, 0.7, true)
 end
 
 if setting("icons", true) then
-	paint.recolour("data/ui_gfx/hud/money.png", colours, 0.8, false)
-	paint.recolour("data/ui_gfx/items/goldnugget.png", colours, 1.0, false)
+	paint.recolor("data/ui_gfx/hud/money.png", colors, 0.8, false)
+	paint.recolor("data/ui_gfx/items/goldnugget.png", colors, 1.0, false)
 end

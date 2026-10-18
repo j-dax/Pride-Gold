@@ -1,6 +1,6 @@
 # Pride Gold
 
-Noita mod that recolours gold with a pride flag.
+Noita mod that recolors gold with a pride flag.
 
 ![Preview](workshop_preview_image.png)
 
@@ -8,6 +8,6 @@ Covers all the gold nuggets (including the idols and the statue), gold dust, mol
 
 Flags: trans, rainbow, bi, pan, non-binary, lesbian, gay (MLM), ace, aro, aroace, genderfluid, genderqueer, agender, polysexual.
 
-To add a flag, add its stripe colours to `files/flags.lua` (top to bottom, repeat a colour to make it thicker) and add the id to the list in `settings.lua`.
+To add a flag, add its stripe colors to `files/flags.lua` (top to bottom, repeat a color to make it thicker) and add the id to the list in `settings.lua`.
 
 Inspired by deathhancox's [Trans Gold](https://github.com/deathhancox/trans_gold).

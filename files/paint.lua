@@ -1,4 +1,4 @@
--- ModImage colours are 0xAABBGGRR
+-- ModImage colors are 0xAABBGGRR
 local M = {}
 
 local function unpack_abgr(c)
@@ -26,9 +26,9 @@ local function shade(rgb, s)
 	return rgb[1] + (255 - rgb[1]) * t, rgb[2] + (255 - rgb[2]) * t, rgb[3] + (255 - rgb[3]) * t
 end
 
-local function stripe(colours, y, top, height)
-	local i = math.floor((y - top + 0.5) * #colours / height) + 1
-	return colours[math.max(1, math.min(#colours, i))]
+local function stripe(colors, y, top, height)
+	local i = math.floor((y - top + 0.5) * #colors / height) + 1
+	return colors[math.max(1, math.min(#colors, i))]
 end
 
 local function bands(row_area, top, bottom, n)
@@ -46,7 +46,7 @@ local function bands(row_area, top, bottom, n)
 	return band
 end
 
-function M.colours(flag)
+function M.colors(flag)
 	local out = {}
 	for i, hex in ipairs(flag.stripes) do out[i] = hex_rgb(hex) end
 	return out
@@ -123,7 +123,7 @@ end
 
 local BLOOD = hex_rgb("C81E1E")
 
-function M.body(src, dst_path, colours, kind, blood)
+function M.body(src, dst_path, colors, kind, blood)
 	local id = ModImageMakeEditable(dst_path, src.w, src.h)
 	local dist = edge_distance(src)
 	local light = lighting(src, kind)
@@ -138,7 +138,7 @@ function M.body(src, dst_path, colours, kind, blood)
 		end
 	end
 	local small = math.min(src.w, src.h) <= 9
-	local band = small and bands(row_area, top, bottom, #colours)
+	local band = small and bands(row_area, top, bottom, #colors)
 	local deepest = 1
 	for _, d in pairs(dist) do deepest = math.max(deepest, d) end
 	local thickness = math.max(1, math.min(math.floor(math.min(src.w, src.h) / 6), math.floor(deepest / 2)))
@@ -148,7 +148,7 @@ function M.body(src, dst_path, colours, kind, blood)
 			local i = y * src.w + x
 			if opaque(src, x, y) then
 				local s = small and math.min(light[i], 1) or light[i]
-				local rgb = band and colours[band[y]] or stripe(colours, y, top, bottom - top + 1)
+				local rgb = band and colors[band[y]] or stripe(colors, y, top, bottom - top + 1)
 				if blood and dist[i] <= thickness then
 					rgb = BLOOD
 					if dist[i] == 1 then s = s * 0.7 end
@@ -164,11 +164,11 @@ function M.body(src, dst_path, colours, kind, blood)
 	end
 end
 
-function M.recolour(path, colours, brightness, sparkle)
+function M.recolor(path, colors, brightness, sparkle)
 	local img = M.read(path)
 	if not img then return end
 	local id = ModImageMakeEditable(path, 0, 0)
-	local light = lighting(img, "colour")
+	local light = lighting(img, "color")
 	local top, bottom = img.h, -1
 	for i, p in pairs(img.px) do
 		if p[4] > 0 then
@@ -181,7 +181,7 @@ function M.recolour(path, colours, brightness, sparkle)
 			local x, y = i % img.w, math.floor(i / img.w)
 			local s = light[i] * brightness
 			if sparkle and light[i] >= 1.2 then s = math.max(s, 1.5) end
-			local r, g, b = shade(stripe(colours, y, top, bottom - top + 1), s)
+			local r, g, b = shade(stripe(colors, y, top, bottom - top + 1), s)
 			ModImageSetPixel(id, x, y, pack_abgr(r, g, b, p[4]))
 		end
 	end
