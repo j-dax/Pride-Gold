@@ -17,7 +17,7 @@ mod_settings = {
 	{
 		id = "flag",
 		ui_name = "Flag",
-		ui_description = "Which pride flag gold is painted with. Applies after restarting the game.",
+		ui_description = "The main flag gold is painted with. Applies after relaunching Noita.",
 		value_default = "trans",
 		values = {
 			{ "trans", "Transgender" },
@@ -66,16 +66,16 @@ mod_settings = {
 		scope = RESTART,
 	},
 	{
-		id = "random_flag",
-		ui_name = "Random flag",
-		ui_description = "Switch to a different random flag each time Noita is launched. New games keep the current flag.",
+		id = "random_nuggets",
+		ui_name = "Random flag per drop",
+		ui_description = "Give each nugget and blood money dropped by enemies, chests, eggs and gold orbs its own random flag. The gold counter, gold dust and nuggets spawned any other way keep the main flag.",
 		value_default = false,
 		scope = RESTART,
 	},
 	{
-		id = "random_nuggets",
-		ui_name = "Random nugget flags",
-		ui_description = "Paint each nugget and blood money dropped by enemies, chests, eggs and gold orbs with a different random flag. The gold counter keeps the main flag.",
+		id = "random_flag",
+		ui_name = "Random main flag",
+		ui_description = "Pick a different main flag each time Noita is launched. New games keep the current one.",
 		value_default = false,
 		scope = RESTART,
 	},
