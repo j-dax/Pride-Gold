@@ -1,4 +1,4 @@
--- Appended to data/scripts/game_helpers.lua: every dropped nugget loads a different flag's copy of its entity
+-- Appended to the scripts that drop nuggets: each one loads a different flag's copy of its entity
 local flags = dofile_once("mods/pride_gold/files/flags.lua")
 local PICKUP = "data/entities/items/pickup/"
 local PAINTED = "mods/pride_gold/files/painted/"
@@ -30,12 +30,24 @@ local function next_flag(x, y)
 	return id
 end
 
-local load_gold_entity_unpainted = load_gold_entity
-
-function load_gold_entity(entity_filename, x, y, remove_timer)
+local function variant(entity_filename, x, y)
 	local file = variants[entity_filename]
 	if file then
-		entity_filename = PAINTED .. next_flag(x, y) .. "/" .. file
+		return PAINTED .. next_flag(x, y) .. "/" .. file
 	end
-	return load_gold_entity_unpainted(entity_filename, x, y, remove_timer)
+	return entity_filename
+end
+
+if load_gold_entity then
+	local load_gold_entity_unpainted = load_gold_entity
+	function load_gold_entity(entity_filename, x, y, ...)
+		return load_gold_entity_unpainted(variant(entity_filename, x, y), x, y, ...)
+	end
+end
+
+if shoot_projectile then
+	local shoot_projectile_unpainted = shoot_projectile
+	function shoot_projectile(who_shot, entity_file, x, y, ...)
+		return shoot_projectile_unpainted(who_shot, variant(entity_file, x, y), x, y, ...)
+	end
 end

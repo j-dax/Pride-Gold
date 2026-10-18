@@ -106,7 +106,9 @@ for _, n in ipairs(nuggets) do
 end
 
 if random_nuggets then
-	ModLuaFileAppend("data/scripts/game_helpers.lua", ROOT .. "drops.lua")
+	for _, script in ipairs({ "game_helpers.lua", "items/gold_orb.lua", "items/gold_orb_greed.lua" }) do
+		ModLuaFileAppend("data/scripts/" .. script, ROOT .. "drops.lua")
+	end
 end
 
 if setting("gold_material", true) then

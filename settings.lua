@@ -75,7 +75,7 @@ mod_settings = {
 	{
 		id = "random_nuggets",
 		ui_name = "Random nugget flags",
-		ui_description = "Paint each nugget dropped by enemies, chests and eggs with a different random flag. The gold counter keeps the main flag.",
+		ui_description = "Paint each nugget and blood money dropped by enemies, chests, eggs and gold orbs with a different random flag. The gold counter keeps the main flag.",
 		value_default = false,
 		scope = RESTART,
 	},
