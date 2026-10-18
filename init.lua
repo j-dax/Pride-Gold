@@ -1,24 +1,9 @@
 local ROOT = "mods/pride_gold/files/"
 local flags = dofile_once(ROOT .. "flags.lua")
 local paint = dofile_once(ROOT .. "paint.lua")
+local nuggets = dofile_once(ROOT .. "nuggets.lua")
 
 local PICKUP = "data/entities/items/pickup/"
-
-local NUGGETS = {
-	{ "goldnugget.xml", "data/items_gfx/goldnugget_01.png", "normal" },
-	{ "goldnugget_10.xml", "data/items_gfx/goldnugget_6px.png", "normal", "bloodmoney_10.xml" },
-	{ "goldnugget_50.xml", "data/items_gfx/goldnugget_9px.png", "normal", "bloodmoney_50.xml" },
-	{ "goldnugget_200.xml", "data/items_gfx/goldnugget_12px.png", "normal", "bloodmoney_200.xml" },
-	{ "goldnugget_1000.xml", "data/items_gfx/goldnugget_20px.png", "normal", "bloodmoney_1000.xml" },
-	{ "goldnugget_10000.xml", "data/items_gfx/easter/golden_idol.png", "color", "bloodmoney_10000.xml" },
-	{ "goldnugget_200000.xml", "data/items_gfx/easter/golden_idol_big.png", "normal", "bloodmoney_200000.xml" },
-	{
-		"goldnugget_x.xml",
-		"data/entities/animals/boss_centipede/rewards/gold_reward_sprite.png",
-		"color",
-		"bloodmoney_x.xml",
-	},
-}
 
 local function setting(id, default)
 	local value = ModSettingGet("pride_gold." .. id)
@@ -79,22 +64,19 @@ edit("data/materials.xml", function(xml)
 	return xml
 end)
 
-for _, n in ipairs(NUGGETS) do
-	local file, image, kind, blood_file = n[1], n[2], n[3], n[4]
-	local src = paint.read(image)
-	local name = ROOT .. "generated/" .. image:match("([^/]+)%.png$")
+for _, n in ipairs(nuggets) do
+	local file, image, blood_file = n[1], n[2], n[4]
+	local name = ROOT .. "painted/" .. flag.id .. "/" .. image:match("([^/]+)%.png$")
 
-	if src and recolor_nuggets then
-		paint.body(src, name .. ".png", colors, kind, false)
+	if recolor_nuggets then
 		edit(PICKUP .. file, function(xml)
 			return (xml:gsub(image, name .. ".png"))
 		end)
 	end
 
 	local blood_image
-	if src and blood_mode == "outline" then
+	if blood_mode == "outline" then
 		blood_image = name .. "_blood.png"
-		paint.body(src, blood_image, colors, kind, true)
 	elseif recolor_nuggets then
 		blood_image = image
 	end
