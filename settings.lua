@@ -68,7 +68,7 @@ mod_settings = {
 	{
 		id = "random_flag",
 		ui_name = "Random flag",
-		ui_description = "Switch to a different random flag each time the game starts.",
+		ui_description = "Switch to a different random flag each time Noita is launched. New games keep the current flag.",
 		value_default = false,
 		scope = RESTART,
 	},
