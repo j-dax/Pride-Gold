@@ -32,18 +32,35 @@ local function edit(path, fn)
 	ModTextFileSetContent(path, fn(ModTextFileGetContent(path)))
 end
 
+local function utc_seconds()
+	local y, m, d, h, mi, s = GameGetDateAndTimeUTC()
+	if m <= 2 then
+		y = y - 1
+	end
+	local days = y * 365 + math.floor(y / 4) - math.floor(y / 100) + math.floor(y / 400)
+		+ math.floor((153 * ((m + 9) % 12) + 2) / 5) + d
+	return ((days * 24 + h) * 60 + mi) * 60 + s
+end
+
+-- Painted images stay cached until Noita is relaunched, so keep one flag per launch
+local launch = utc_seconds() - GameGetRealWorldTimeSinceStarted()
+local same_launch = math.abs(launch - setting("launch", -1e9)) <= 2
+
 local flag = flags[1]
 local index = 1
+local wanted = same_launch and setting("painted", nil) or setting("flag", "trans")
 for i, f in ipairs(flags) do
-	if f.id == setting("flag", "trans") then
+	if f.id == wanted then
 		index = i
 		flag = f
 	end
 end
-if setting("random_flag", false) then
+if setting("random_flag", false) and not same_launch then
 	flag = flags[(index - 1 + math.random(#flags - 1)) % #flags + 1]
 	ModSettingSetNextValue("pride_gold.flag", flag.id, false)
 end
+ModSettingSet("pride_gold.launch", launch)
+ModSettingSet("pride_gold.painted", flag.id)
 
 local colours = paint.colours(flag)
 local recolour_nuggets = setting("nuggets", true)
