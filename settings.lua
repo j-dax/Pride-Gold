@@ -72,6 +72,13 @@ mod_settings = {
 		value_default = false,
 		scope = RESTART,
 	},
+	{
+		id = "random_nuggets",
+		ui_name = "Random nugget flags",
+		ui_description = "Paint each nugget dropped by enemies, chests and eggs with a different random flag. The gold counter keeps the main flag.",
+		value_default = false,
+		scope = RESTART,
+	},
 }
 
 function ModSettingsUpdate(init_scope)

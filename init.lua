@@ -64,33 +64,49 @@ edit("data/materials.xml", function(xml)
 	return xml
 end)
 
+local random_nuggets = recolor_nuggets and setting("random_nuggets", false)
+
 for _, n in ipairs(nuggets) do
 	local file, image, blood_file = n[1], n[2], n[4]
-	local name = ROOT .. "painted/" .. flag.id .. "/" .. image:match("([^/]+)%.png$")
+	local xml = ModTextFileGetContent(PICKUP .. file)
+	local blood_xml = blood_file and ModTextFileGetContent(PICKUP .. blood_file)
 
-	if recolor_nuggets then
-		edit(PICKUP .. file, function(xml)
-			return (xml:gsub(image, name .. ".png"))
-		end)
-	end
+	local function write(dir, id)
+		local name = ROOT .. "painted/" .. id .. "/" .. image:match("([^/]+)%.png$")
+		if recolor_nuggets then
+			ModTextFileSetContent(dir .. file, (xml:gsub(image, name .. ".png")))
+		end
 
-	local blood_image
-	if blood_mode == "outline" then
-		blood_image = name .. "_blood.png"
-	elseif recolor_nuggets then
-		blood_image = image
-	end
-	if blood_file and blood_image then
-		edit(PICKUP .. blood_file, function(xml)
-			return (
-				xml:gsub(
-					'material="bloodgold_box2d"',
-					'image_file="' .. blood_image .. '" material="bloodgold_box2d"',
-					1
+		local blood_image
+		if blood_mode == "outline" then
+			blood_image = name .. "_blood.png"
+		elseif recolor_nuggets then
+			blood_image = image
+		end
+		if blood_xml and blood_image then
+			ModTextFileSetContent(
+				dir .. blood_file,
+				(
+					blood_xml:gsub(
+						'material="bloodgold_box2d"',
+						'image_file="' .. blood_image .. '" material="bloodgold_box2d"',
+						1
+					)
 				)
 			)
-		end)
+		end
 	end
+
+	write(PICKUP, flag.id)
+	if random_nuggets then
+		for _, f in ipairs(flags) do
+			write(ROOT .. "painted/" .. f.id .. "/", f.id)
+		end
+	end
+end
+
+if random_nuggets then
+	ModLuaFileAppend("data/scripts/game_helpers.lua", ROOT .. "drops.lua")
 end
 
 if setting("gold_material", true) then
