@@ -8,6 +8,10 @@ Covers all the gold nuggets (including the idols and the statue), gold dust, mol
 
 Flags: trans, rainbow, bi, pan, non-binary, lesbian, gay (MLM), ace, aro, aroace, genderfluid, genderqueer, agender, polysexual.
 
-To add a flag, add its stripe colors to `files/flags.lua` (top to bottom, repeat a color to make it thicker) and add the id to the list in `settings.lua`.
+To add a flag, add its stripe colors to `files/flags.lua` (top to bottom, repeat a color to make it thicker) and add the id to the list in `settings.lua`. Then repaint the nugget images in `files/painted/` (also needed after changing `files/paint.lua`):
+
+```
+uv run --with lupa --with pillow python tools/preview.py --game "<folder containing the unpacked data/>"
+```
 
 Inspired by deathhancox's [Trans Gold](https://github.com/deathhancox/trans_gold).
