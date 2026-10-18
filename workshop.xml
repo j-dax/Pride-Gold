@@ -2,5 +2,6 @@
 	name="Pride Gold"
 	description="Recolors gold nuggets, gold and the gold icons with a pride flag. 14 flags to pick from in Mod Settings. Blood money gets a red outline. Inspired by deathhancox (Trans Gold)."
 	tags="graphics"
+	dont_upload_folders="tools"
 >
 </Mod>
