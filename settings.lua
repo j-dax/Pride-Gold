@@ -68,7 +68,7 @@ mod_settings = {
 	{
 		id = "random_nuggets",
 		ui_name = "Random flag per drop",
-		ui_description = "Give each nugget and blood money dropped by enemies, chests, eggs and gold orbs its own random flag. The gold counter, gold dust and nuggets spawned any other way keep the main flag.",
+		ui_description = "Give each nugget dropped by enemies, chests, eggs and gold orbs its own random flag. The gold counter, gold dust and nuggets spawned any other way keep the main flag.",
 		value_default = false,
 		scope = RESTART,
 	},
